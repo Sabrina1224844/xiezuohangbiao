@@ -1,0 +1,49 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install Cordova
+        run: npm install -g cordova@12
+
+      - name: Create Cordova app and copy site
+        run: |
+          cordova create app com.sabrina.writingnav WritingNav --no-telemetry
+          rm -rf app/www/*
+          cp index.html app/www/
+          cp -r js app/www/
+          cp -r css app/www/
+          sed -i 's|<name>WritingNav</name>|<name>写作航标</name>|' app/config.xml
+
+      - name: Add Android platform
+        run: |
+          cd app
+          cordova platform add android@13 --no-telemetry
+
+      - name: Build debug APK
+        run: |
+          cd app
+          cordova build android --no-telemetry
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: app/platforms/android/app/build/outputs/apk/debug/app-debug.apk
