@@ -6,8 +6,7 @@
    分类体系（XXW_CATS）：一级 4 大类，二级 39 子类（冷门子类已合并）：
      心理描写 14 / 动作描写 9 / 环境描写 6 / 黄金句型 10
    XXW_DRAFT 句子通过 sub（二级 id）归入分类，一级名由 data.js 反查。
-   ★ 扩量批次：① 动作+心理（本批已覆盖）
-              ② 环境+黄金句型（待补，空子类浏览页显示「拟写中」）
+   ★ 全部 39 个子类均已覆盖（共 167 句：心理 59 / 动作 38 / 环境 30 / 句型 40）
    ===================================================== */
 
 window.XXW_CATS = [
@@ -402,17 +401,113 @@ window.XXW_DRAFT = [
     en:"Her eyelids were as heavy as lead.",
     cn:"她的眼皮沉得像灌了铅。" },
 
-  /* ================= 环境描写（批次②拟写中，现仅早期样例） ================= */
+  /* ================= 环境描写 ================= */
 
+  /* ---- 天气·雨雪风霜 ---- */
+  { id:"dd98",  sub:"env-weather", struct:"非谓语·现在分词", tpl:"Rain + did sth, doing sth",
+    en:"Rain drummed softly on the roof, lulling me to sleep.",
+    cn:"雨点轻敲屋顶，哄我入眠。" },
+  { id:"dd99",  sub:"env-weather", struct:"过去完成时", tpl:"had done by the time...",
+    en:"Dark clouds had gathered by the time we reached the top.",
+    cn:"我们到山顶时，乌云已经聚拢。" },
+  { id:"dd100", sub:"env-weather", struct:"明喻", tpl:"The + adj. + wind did sth like + 比喻",
+    en:"The biting wind cut through my thin jacket like knives.",
+    cn:"刺骨的寒风像刀子一样割透我单薄的夹克。" },
+  { id:"dd101", sub:"env-weather", struct:"非谓语·结果状语", tpl:"sth did sth, leaving...",
+    en:"The rain stopped at last, leaving the air fresh and clean.",
+    cn:"雨终于停了，留下清新干净的空气。" },
   { id:"x05", sub:"env-weather", struct:"拟人 + 非谓语", tpl:"+ 自然物 + did sth, doing sth",
     en:"A gentle breeze whispered through the valley, carrying the sweet scent of wildflowers.",
     cn:"微风拂过山谷，送来野花的芬芳。" },
+
+  /* ---- 日月星辰·天空 ---- */
+  { id:"dd102", sub:"env-sky", struct:"拟人（paint）", tpl:"The + n. + painted sth + 颜色",
+    en:"The setting sun painted the clouds gold and pink.",
+    cn:"落日把云染成金色和粉色。" },
+  { id:"dd103", sub:"env-sky", struct:"明喻", tpl:"sth did sth like + 比喻",
+    en:"Stars sparkled above us like diamonds scattered on velvet.",
+    cn:"星星在我们头顶闪烁，像散落在天鹅绒上的钻石。" },
+  { id:"dd104", sub:"env-sky", struct:"非谓语·现在分词", tpl:"sth + did sth, casting...",
+    en:"The moon hung low over the sea, casting a silver path on the waves.",
+    cn:"月亮低悬海上，在波浪上洒下一条银路。" },
+  { id:"dd105", sub:"env-sky", struct:"as 时间从句", tpl:"sth turned from A to B as...",
+    en:"The sky slowly turned from orange to deep blue as night fell.",
+    cn:"夜幕降临，天空从橙色慢慢变成深蓝。" },
   { id:"x02", sub:"env-sky", struct:"非谓语·现在分词", tpl:"主语 + did sth, doing sth",
     en:"The golden sunlight filtered through the leaves, painting the path with dappled shadows.",
     cn:"金色阳光透过树叶洒下，在小路上绘出斑驳的影子。" },
 
-  /* ================= 黄金句型（批次②扩量，先收入独立主格） ================= */
+  /* ---- 山水草木·花鸟 ---- */
+  { id:"dd106", sub:"env-nature", struct:"拟人", tpl:"sth + did sth in the...",
+    en:"Wildflowers nodded in the breeze along the winding path.",
+    cn:"弯曲的小路边，野花在微风中点头。" },
+  { id:"dd107", sub:"env-nature", struct:"go + doing", tpl:"sth went doing sth over...",
+    en:"The stream went murmuring over the smooth pebbles.",
+    cn:"小溪潺潺流过光滑的鹅卵石。" },
+  { id:"dd108", sub:"env-nature", struct:"非谓语·现在分词", tpl:"sth did sth, doing sth",
+    en:"A bird landed on the windowsill, tilting its head at me.",
+    cn:"一只鸟落在窗台上，歪着头看我。" },
+  { id:"dd109", sub:"env-nature", struct:"非谓语·现在分词", tpl:"sth did sth, sheltering...",
+    en:"The old oak spread its branches, sheltering us from the sun.",
+    cn:"老橡树张开枝叶，为我们挡住烈日。" },
+  { id:"dd110", sub:"env-nature", struct:"副词开头 + 后置定语", tpl:"Far below, sth stretched + adj.",
+    en:"Far below, the valley stretched green and endless.",
+    cn:"山下远处，绿色的山谷绵延无尽。" },
 
+  /* ---- 声音·气味·氛围 ---- */
+  { id:"dd111", sub:"env-sound", struct:"无灵主语", tpl:"The smell of... + did sth",
+    en:"The sweet smell of fresh bread drifted from the kitchen.",
+    cn:"新鲜面包的甜香从厨房飘来。" },
+  { id:"dd112", sub:"env-sound", struct:"非谓语·现在分词", tpl:"sth did sth, doing sth",
+    en:"In the distance, a train whistled, breaking the silence of the night.",
+    cn:"远处火车鸣笛，划破夜的寂静。" },
+  { id:"dd113", sub:"env-sound", struct:"so...that 结果状语", tpl:"sth went so + adj. that...",
+    en:"The hall went so quiet that we could hear our own heartbeats.",
+    cn:"大厅安静得我们能听见自己的心跳。" },
+  { id:"dd114", sub:"env-sound", struct:"无灵主语", tpl:"Laughter + spilled out of...",
+    en:"Laughter spilled out of the classroom into the corridor.",
+    cn:"笑声从教室里漫出到走廊。" },
+  { id:"dd115", sub:"env-sound", struct:"拟人", tpl:"sth + sang/danced...",
+    en:"Crickets sang their endless song in the grass.",
+    cn:"蟋蟀在草丛里唱个不停。" },
+
+  /* ---- 时间·季节·晨昏 ---- */
+  { id:"dd116", sub:"env-time", struct:"无灵主语", tpl:"Dawn broke over...",
+    en:"Dawn broke gently over the sleepy little town.",
+    cn:"黎明温柔地降临这座沉睡的小镇。" },
+  { id:"dd117", sub:"env-time", struct:"并列 + 拟人", tpl:"sth grew + adj., and sth did sth",
+    en:"The days grew shorter, and a chill crept into the mornings.",
+    cn:"白昼渐短，清晨悄悄渗进凉意。" },
+  { id:"dd118", sub:"env-time", struct:"过去完成时", tpl:"By the time..., sth had done",
+    en:"By the time winter arrived, the old tree had shed every leaf.",
+    cn:"冬天来时，老树已落尽叶子。" },
+  { id:"dd119", sub:"env-time", struct:"非谓语·现在分词", tpl:"sth returned, doing sth",
+    en:"Spring returned at last, waking the garden from its long sleep.",
+    cn:"春天终于回来，把花园从长眠中唤醒。" },
+  { id:"dd120", sub:"env-time", struct:"无灵主语 + 宾补", tpl:"sth stretched sth + adj.",
+    en:"The evening light stretched our shadows long across the yard.",
+    cn:"傍晚的光把我们的影子在院子里拉得很长。" },
+
+  /* ---- 典型场景·地点 ---- */
+  { id:"dd121", sub:"env-place", struct:"smell of", tpl:"sth smelled of + n.",
+    en:"The old library smelled of dust and years.",
+    cn:"老图书馆里满是灰尘与岁月的味道。" },
+  { id:"dd122", sub:"env-place", struct:"非谓语·现在分词", tpl:"sth did sth, doing sth",
+    en:"Sunlight spilled through the stained glass, coloring the stone floor.",
+    cn:"阳光透过彩绘玻璃洒下，给石地镀上颜色。" },
+  { id:"dd123", sub:"env-place", struct:"buzz with", tpl:"sth buzzed with...",
+    en:"The market buzzed with voices and the smell of ripe fruit.",
+    cn:"市场里人声鼎沸，飘着熟果的香气。" },
+  { id:"dd124", sub:"env-place", struct:"形容词开头 + 拟人", tpl:"adj. and adj., sth did sth",
+    en:"Empty and quiet, the playground waited for the children to return.",
+    cn:"空荡荡的操场静静等着孩子们回来。" },
+  { id:"dd125", sub:"env-place", struct:"倒装（地点开头）", tpl:"Beyond..., lay sth, adj. and adj.",
+    en:"Beyond the hills lay the sea, calm and endless.",
+    cn:"山那边是大海，平静而无垠。" },
+
+  /* ================= 黄金句型 ================= */
+
+  /* ---- 独立主格 ---- */
   { id:"dd17", sub:"sen-absolute", struct:"独立主格（条件）", tpl:"Weather permitting, ...",
     en:"Weather permitting, we would reach the campsite before dark.",
     cn:"天气若允许，我们就能在天黑前赶到营地。" },
@@ -424,5 +519,131 @@ window.XXW_DRAFT = [
     cn:"奶奶声音微微发颤，给我们讲起过去的故事。" },
   { id:"dd20", sub:"sen-absolute", struct:"独立主格（n. + done）", tpl:"Everything taken into account, ...",
     en:"Everything taken into account, the trip was more than worth it.",
-    cn:"把一切都算进去，这趟旅行太值了。" }
+    cn:"把一切都算进去，这趟旅行太值了。" },
+
+  /* ---- with 复合结构 ---- */
+  { id:"dd126", sub:"sen-with", struct:"with + n. + doing", tpl:"With + n. + doing, sb did sth",
+    en:"With the audience clapping, she took a deep bow.",
+    cn:"观众鼓着掌，她深深鞠了一躬。" },
+  { id:"dd127", sub:"sen-with", struct:"with + n. + done", tpl:"..., with + n. + done",
+    en:"He stood there, with his eyes fixed on the horizon.",
+    cn:"他站在那里，目光钉在地平线上。" },
+  { id:"dd128", sub:"sen-with", struct:"with + n. + 介短", tpl:"With + n. + 介词短语, sb did sth",
+    en:"With the exam around the corner, everyone hit the books.",
+    cn:"考试临近，大家都埋头苦读。" },
+  { id:"dd129", sub:"sen-with", struct:"with + n. + doing", tpl:"..., with + n. + doing",
+    en:"She ran back, with tears streaming down her face.",
+    cn:"她跑了回去，泪水顺着脸颊直淌。" },
+
+  /* ---- 非谓语·分词作状语 ---- */
+  { id:"dd130", sub:"sen-participle", struct:"Having done", tpl:"Having done sth, sb did sth",
+    en:"Having finished the race, he collapsed onto the track, exhausted.",
+    cn:"跑完比赛，他瘫倒在跑道上。" },
+  { id:"dd131", sub:"sen-participle", struct:"过去分词作状语", tpl:"过去分词, sth did sth",
+    en:"Seen from the hilltop, the town looked like a toy model.",
+    cn:"从山顶望去，小镇像一座玩具模型。" },
+  { id:"dd132", sub:"sen-participle", struct:"否定分词", tpl:"Not doing sth, sb did sth",
+    en:"Not daring to look back, she ran faster and faster.",
+    cn:"她不敢回头，越跑越快。" },
+  { id:"dd133", sub:"sen-participle", struct:"完成式独立主格", tpl:"n. + having done, sb did sth",
+    en:"The sun having set, we headed home in the dusk.",
+    cn:"太阳落山了，我们踏着暮色回家。" },
+
+  /* ---- 倒装句 ---- */
+  { id:"dd134", sub:"sen-inversion", struct:"Never 倒装", tpl:"Never had sb done sth",
+    en:"Never had she felt so proud of her hometown.",
+    cn:"她从未这样为家乡自豪过。" },
+  { id:"dd135", sub:"sen-inversion", struct:"Hardly...when", tpl:"Hardly had sb done sth when...",
+    en:"Hardly had we sat down when the film began.",
+    cn:"我们刚坐下，电影就开始了。" },
+  { id:"dd136", sub:"sen-inversion", struct:"Not until 倒装", tpl:"Not until... did sb do sth",
+    en:"Not until that night did I understand Mom's silence.",
+    cn:"直到那晚，我才读懂妈妈的沉默。" },
+  { id:"dd137", sub:"sen-inversion", struct:"地点倒装", tpl:"地点状语 + lay/hung sth",
+    en:"On the wall hung an old photo of my grandparents.",
+    cn:"墙上挂着爷爷奶奶的一张旧照片。" },
+
+  /* ---- 强调句 ---- */
+  { id:"dd138", sub:"sen-cleft", struct:"not...but 强调", tpl:"It is/was + 强调部分 + that...",
+    en:"It was not the gift but the thought that moved me most.",
+    cn:"最打动我的不是礼物，而是心意。" },
+  { id:"dd139", sub:"sen-cleft", struct:"强调人", tpl:"It is/was sb who...",
+    en:"It was Grandpa who taught me to love the stars.",
+    cn:"是爷爷教会我爱上星空。" },
+  { id:"dd140", sub:"sen-cleft", struct:"强调时间/地点", tpl:"It was + 时间/地点 + that...",
+    en:"It was in that small shop that our story began.",
+    cn:"我们的故事正是从那家小店开始的。" },
+  { id:"dd141", sub:"sen-cleft", struct:"not until 强调", tpl:"It was not until... that...",
+    en:"It was not until years later that the letter reached her.",
+    cn:"直到多年后，那封信才到她手中。" },
+
+  /* ---- 虚拟语气 ---- */
+  { id:"dd142", sub:"sen-virtual", struct:"If 虚拟（现在）", tpl:"If sb were..., sb would...",
+    en:"If I were you, I would seize this once-in-a-lifetime chance.",
+    cn:"我要是你，就抓住这千载难逢的机会。" },
+  { id:"dd143", sub:"sen-virtual", struct:"含蓄虚拟（without）", tpl:"Without..., sb couldn't have done",
+    en:"Without your help, I couldn't have finished the project.",
+    cn:"没有你的帮助，我不可能完成这个项目。" },
+  { id:"dd144", sub:"sen-virtual", struct:"wish 虚拟（过去）", tpl:"I wish sb had done sth",
+    en:"I wish I had said sorry before she left.",
+    cn:"真希望在她离开前我说了抱歉。" },
+  { id:"dd145", sub:"sen-virtual", struct:"倒装虚拟", tpl:"Had sb done..., ... would...",
+    en:"Had I known the truth earlier, things would be different now.",
+    cn:"早知道真相，现在一切都会不同。" },
+
+  /* ---- 无灵主语 ---- */
+  { id:"dd146", sub:"sen-inanimate", struct:"感觉作主语", tpl:"A + adj. + n. + did sth",
+    en:"A warm feeling crept over me as I read her note.",
+    cn:"读着她的便条，一股暖意爬上心头。" },
+  { id:"dd147", sub:"sen-inanimate", struct:"无灵主语 + 宾补", tpl:"sth brought sb to...",
+    en:"The news brought the whole village to its feet.",
+    cn:"这消息让全村人瞬间沸腾。" },
+  { id:"dd148", sub:"sen-inanimate", struct:"抽象名词拟人", tpl:"+ 抽象名词 + found its voice",
+    en:"Courage finally found its voice, and I raised my hand.",
+    cn:"勇气终于发出了声音，我举起了手。" },
+  { id:"dd149", sub:"sen-inanimate", struct:"拟人（stay away）", tpl:"sth stayed away from sb",
+    en:"That night, sleep stayed far away from me.",
+    cn:"那晚，睡意离我远远的。" },
+
+  /* ---- 感官融合句 ---- */
+  { id:"dd150", sub:"sen-sense", struct:"the moment + 感官", tpl:"The moment..., sth hit sb",
+    en:"The moment I stepped in, the smell of rain hit me.",
+    cn:"一进门，雨的气息扑面而来。" },
+  { id:"dd151", sub:"sen-sense", struct:"听感 + 心理", tpl:"sb heard sth do and felt...",
+    en:"I heard the door creak open and felt my heart skip a beat.",
+    cn:"我听见门吱呀开启，心猛地一跳。" },
+  { id:"dd152", sub:"sen-sense", struct:"独立主格（感官）", tpl:"+ n. + 介词短语, sb did sth",
+    en:"Cold air on my face, I finally felt awake.",
+    cn:"冷风吹在脸上，我一下子清醒了。" },
+  { id:"dd153", sub:"sen-sense", struct:"地点倒装 + 非谓语", tpl:"From... came sth, doing sth",
+    en:"From the kitchen came the smell of Mom's pancakes, making my mouth water.",
+    cn:"厨房里飘来妈妈煎饼的香味，让我直咽口水。" },
+
+  /* ---- 各类从句 ---- */
+  { id:"dd154", sub:"sen-clause", struct:"主语从句", tpl:"What... is...",
+    en:"What matters most is not the result but the growth.",
+    cn:"最重要的是成长，而非结果。" },
+  { id:"dd155", sub:"sen-clause", struct:"让步状语从句", tpl:"Wherever...",
+    en:"Wherever life took us, her letters always found me.",
+    cn:"无论生活带我们去哪，她的信总能找到我。" },
+  { id:"dd156", sub:"sen-clause", struct:"宾语从句（dawn on）", tpl:"It dawned on sb that...",
+    en:"It suddenly dawned on me that she had been protecting me all along.",
+    cn:"我突然明白，她一直在保护我。" },
+  { id:"dd157", sub:"sen-clause", struct:"条件状语从句", tpl:"As long as...",
+    en:"As long as we stay together, no winter is too long.",
+    cn:"只要我们在一起，再长的冬天也不算长。" },
+
+  /* ---- 修辞·比喻拟人 ---- */
+  { id:"dd158", sub:"sen-rhetoric", struct:"暗喻", tpl:"sth is a + 比喻",
+    en:"Hope is a lighthouse standing firm against the waves.",
+    cn:"希望是一座在风浪中挺立的灯塔。" },
+  { id:"dd159", sub:"sen-rhetoric", struct:"同位语比喻", tpl:"sth, that + 比喻, ...",
+    en:"Time, that gentle thief, quietly took my grandmother's black hair away.",
+    cn:"时间这位温柔的小偷，悄悄带走了外婆的黑发。" },
+  { id:"dd160", sub:"sen-rhetoric", struct:"明喻 + 定语从句", tpl:"sth were a key that...",
+    en:"Her words were a key that unlocked the door in my heart.",
+    cn:"她的话是一把钥匙，打开了我心里的门。" },
+  { id:"dd161", sub:"sen-rhetoric", struct:"拟人", tpl:"sth sank into the arms of...",
+    en:"The weary sun sank slowly into the arms of the hills.",
+    cn:"疲惫的太阳缓缓沉入群山的臂弯。" }
 ];
