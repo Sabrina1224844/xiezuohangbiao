@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2f5fb">
+<title>写作航标 · 高考英语写作素材与复习助手</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="phone" id="phone" data-sub="0">
+
+  <main class="views">
+
+    <!-- ============ ① 首页 ============ -->
+    <section class="view active" id="view-home">
+      <header class="home-head">
+        <h1>写作航标</h1>
+        <p>高考英语写作素材与复习助手</p>
+      </header>
+
+      <!-- 例句卡片：每次加载从读后续写语料库随机抽取，点击 Hero 放大进详情 -->
+      <article class="card example-card" id="exampleCard" onclick="App.openExampleDetail()">
+        <div class="example-top">
+          <span class="badge">读后续写例句</span>
+          <span class="example-tools">
+            <button class="icon-btn" id="exampleFavBtn" aria-label="收藏例句" onclick="event.stopPropagation();App.favExample()">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.6 9.7l5.8-.8Z"/></svg>
+            </button>
+            <button class="icon-btn" aria-label="换一句" onclick="event.stopPropagation();App.shuffleExample()">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+            </button>
+          </span>
+        </div>
+        <p class="example-en" id="exampleEn"></p>
+        <p class="example-cn" id="exampleCn"></p>
+        <p class="example-scenes">适用场景：<span id="exampleScenes"></span></p>
+      </article>
+
+      <!-- 今日任务：学习 / 复习 双进度合并大卡片 -->
+      <article class="card task-card" id="taskCard">
+        <div class="task-head">
+          <h2 class="task-title">今日任务</h2>
+          <button class="task-link" onclick="App.openReview()">复习队列 ›</button>
+        </div>
+
+        <div class="task-block">
+          <div class="task-row">
+            <span class="task-name">今日学习</span>
+            <span class="task-num"><b id="studyDone">0</b> / <span id="studyTotal">10</span> 新素材</span>
+          </div>
+          <div class="bar"><i id="studyBar"></i></div>
+          <button class="btn" onclick="App.startStudy()">开始学习</button>
+        </div>
+
+        <div class="task-divider"></div>
+
+        <div class="task-block">
+          <div class="task-row">
+            <span class="task-name">今日复习</span>
+            <span class="task-num"><b id="reviewDone">0</b> / <span id="reviewTotal">0</span> 待复习</span>
+          </div>
+          <div class="bar"><i id="reviewBar"></i></div>
+          <button class="btn" onclick="App.startReview()">开始复习</button>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ ② 素材广场 ============ -->
+    <section class="view" id="view-plaza">
+      <header class="page-head"><h2>素材广场</h2></header>
+
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="searchInput" placeholder="搜索单词 / 释义" oninput="App.renderPlaza()">
+      </div>
+
+      <div class="seg" id="plazaSeg">
+        <button class="seg-btn active" data-k="words" onclick="App.setPlazaCat('words')">背单词</button>
+        <button class="seg-btn" data-k="writing" onclick="App.setPlazaCat('writing')">应用文模板</button>
+        <button class="seg-btn" data-k="xuexie" onclick="App.setPlazaCat('xuexie')">读后续写</button>
+      </div>
+
+      <div id="plazaList" class="plaza-list"></div>
+    </section>
+
+    <!-- ============ ③ 草稿箱（素材收藏仓库） ============ -->
+    <section class="view" id="view-drafts">
+      <header class="page-head"><h2>草稿箱</h2></header>
+      <p class="page-tip">收藏的单词与句子仓库，不会自动生成复习任务。</p>
+      <div class="fav-tabs" id="favTabs"></div>
+      <div id="favList"></div>
+    </section>
+
+    <!-- ============ 复习任务队列（独立页面） ============ -->
+    <section class="view subpage" id="view-review">
+      <header class="sub-head">
+        <button class="icon-btn" aria-label="返回" onclick="App.goHome()">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <h2>复习队列</h2>
+      </header>
+      <p class="page-tip">当天学完的新词 / 新句子，会在第二天自动进入这里；未完成的任务会一直保留。</p>
+      <div id="reviewList"></div>
+    </section>
+
+    <!-- ============ 作文草稿（独立子页面，原功能保留） ============ -->
+    <section class="view subpage" id="view-essays">
+      <header class="sub-head">
+        <button class="icon-btn" aria-label="返回" onclick="App.showView('mine')">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <h2>作文草稿</h2>
+        <button class="pill-btn" onclick="App.newDraft()">＋ 新建</button>
+      </header>
+      <div id="essayList" class="draft-list"></div>
+    </section>
+
+    <!-- ============ ④ 我的 ============ -->
+    <section class="view" id="view-mine">
+      <header class="page-head"><h2>我的</h2></header>
+      <div id="statsWrap"></div>
+      <div class="card menu-card">
+        <button class="menu-item" onclick="App.openEssays()">作文草稿<span>›</span></button>
+        <button class="menu-item" onclick="App.clearRecords()">清空本地学习记录<span>›</span></button>
+        <button class="menu-item" onclick="App.openAbout()">关于软件说明<span>›</span></button>
+      </div>
+    </section>
+
+    <!-- ============ 单词详情页（子页面，Hero 目标卡片） ============ -->
+    <section class="view subpage" id="view-word">
+      <header class="sub-head">
+        <button class="icon-btn" aria-label="返回" onclick="App.backFromWord()">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <h2>单词详情</h2>
+      </header>
+      <div id="wordBody"></div>
+    </section>
+
+    <!-- ============ 应用文模板库（子页面：左体裁栏可伸缩 + 右内容） ============ -->
+    <section class="view subpage" id="view-templates">
+      <header class="sub-head">
+        <button class="icon-btn" aria-label="返回" onclick="App.showView('plaza')">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <h2>应用文模板库</h2>
+        <button class="pill-btn" id="tplPill" onclick="App.toggleTplSide()">收起体裁栏</button>
+      </header>
+      <div class="tpl-wrap" id="tplWrap">
+        <aside class="tpl-side" id="tplSide"></aside>
+        <button class="tpl-handle" id="tplHandle" aria-label="收起/展开体裁栏" onclick="App.toggleTplSide()">‹</button>
+        <div class="tpl-main" id="tplMain"></div>
+      </div>
+    </section>
+
+    <!-- ============ 读后续写素材库（子页面：左一级分类栏可伸缩 + 顶部二级滑动栏） ============ -->
+    <section class="view subpage" id="view-xuexie">
+      <header class="sub-head">
+        <button class="icon-btn" aria-label="返回" onclick="App.showView('plaza')">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <h2>读后续写素材库</h2>
+        <button class="pill-btn" id="xxPill" onclick="App.toggleXxSide()">收起分类栏</button>
+      </header>
+      <div class="tpl-wrap" id="xxWrap">
+        <aside class="tpl-side" id="xxSide"></aside>
+        <button class="tpl-handle" id="xxHandle" aria-label="收起/展开分类栏" onclick="App.toggleXxSide()">‹</button>
+        <div class="tpl-main" id="xxMain"></div>
+      </div>
+    </section>
+
+    <!-- ============ 学习 / 复习页（子页面） ============ -->
+    <section class="view subpage" id="view-study">
+      <header class="sub-head">
+        <button class="icon-btn" aria-label="返回" onclick="App.goHome()">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <h2 id="studyTitle">学习模式</h2>
+        <button class="pill-btn" onclick="App.openPicker()">切换板块 / 修改设置</button>
+      </header>
+      <div id="studyBody"></div>
+    </section>
+
+    <!-- ============ 草稿编辑页（子页面） ============ -->
+    <section class="view subpage" id="view-editor">
+      <header class="sub-head">
+        <button class="icon-btn" aria-label="返回" onclick="App.closeEditor()">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <h2>编辑草稿</h2>
+        <button class="pill-btn danger" onclick="App.deleteDraft()">删除</button>
+      </header>
+      <div class="card editor-card">
+        <input id="draftTitle" placeholder="作文标题" oninput="App.autoSave()">
+        <div class="editor-meta" id="saveState">自动保存已开启</div>
+        <textarea id="draftBody" placeholder="Start writing your essay here..." oninput="App.autoSave()"></textarea>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 底部 Tab 导航 ============ -->
+  <nav class="tabbar" id="tabbar">
+    <button class="tab active" data-tab="home" onclick="App.switchTab('home')">
+      <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
+      <span>首页</span>
+    </button>
+    <button class="tab" data-tab="plaza" onclick="App.switchTab('plaza')">
+      <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2"/><rect x="13" y="13" width="7.5" height="7.5" rx="2"/></svg>
+      <span>素材广场</span>
+    </button>
+    <button class="tab" data-tab="drafts" onclick="App.switchTab('drafts')">
+      <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      <span>草稿箱</span>
+    </button>
+    <button class="tab" data-tab="mine" onclick="App.switchTab('mine')">
+      <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg>
+      <span>我的</span>
+    </button>
+  </nav>
+
+  <!-- ============ 弹窗：板块选择 / 修改设置 ============ -->
+  <div class="modal" id="modalPicker">
+    <div class="mask" onclick="App.closeModal('modalPicker')"></div>
+    <div class="sheet">
+      <h3 class="sheet-title">选择学习板块</h3>
+      <div id="pickerLibs"></div>
+
+      <h3 class="sheet-title">学习范围</h3>
+      <div class="seg src-seg" id="srcSeg">
+        <button class="seg-btn" data-s="all" onclick="App.setSrc('all')">全部素材</button>
+        <button class="seg-btn" data-s="fav" onclick="App.setSrc('fav')">我的收藏</button>
+      </div>
+      <p class="sheet-tip">「我的收藏」＝只从草稿箱该板块的收藏中抽取新素材学习</p>
+
+      <h3 class="sheet-title">每日学习数量</h3>
+      <div class="stepper">
+        <button onclick="App.stepDaily(-5)" aria-label="减少5">−5</button>
+        <div class="val"><span id="dailyVal">10</span><small>个 / 天</small></div>
+        <button onclick="App.stepDaily(5)" aria-label="增加5">＋5</button>
+      </div>
+      <div class="chips" id="dailyChips">
+        <button class="chip" data-v="5" onclick="App.setDaily(5)">5</button>
+        <button class="chip" data-v="10" onclick="App.setDaily(10)">10</button>
+        <button class="chip" data-v="15" onclick="App.setDaily(15)">15</button>
+        <button class="chip" data-v="20" onclick="App.setDaily(20)">20</button>
+        <button class="chip" data-v="25" onclick="App.setDaily(25)">25</button>
+        <button class="chip" data-v="30" onclick="App.setDaily(30)">30</button>
+        <button class="chip" data-v="40" onclick="App.setDaily(40)">40</button>
+        <button class="chip" data-v="50" onclick="App.setDaily(50)">50</button>
+      </div>
+      <p class="sheet-tip">数量仅支持 5 的倍数，通过步进按钮调整</p>
+      <button class="btn" onclick="App.confirmPicker()">保存并进入</button>
+    </div>
+  </div>
+
+  <!-- ============ 弹窗：素材详情（Hero 目标卡片） ============ -->
+  <div class="modal" id="modalDetail">
+    <div class="mask" onclick="App.closeDetail()"></div>
+    <div class="detail-wrap" id="detailWrap"></div>
+  </div>
+
+  <!-- ============ 弹窗：关于软件 ============ -->
+  <div class="modal" id="modalAbout">
+    <div class="mask" onclick="App.closeModal('modalAbout')"></div>
+    <div class="sheet">
+      <h3 class="sheet-title">关于写作航标</h3>
+      <p class="about-text">
+        「写作航标」是一款面向高三学生的<strong>高考英语写作素材与复习助手</strong>。
+        内置背单词、应用文模板、读后续写素材三大板块，采用记忆卡片模式，
+        支持自定义每日学习数量与独立复习进度。
+      </p>
+      <p class="about-text">所有数据仅保存在本机浏览器中，不联网、不上传，请放心使用。</p>
+      <p class="about-ver">版本 1.0.0 · 纯本地离线应用</p>
+      <button class="btn ghost" onclick="App.closeModal('modalAbout')">我知道了</button>
+    </div>
+  </div>
+
+  <!-- ============ 弹窗：通用确认 ============ -->
+  <div class="modal" id="modalConfirm">
+    <div class="mask"></div>
+    <div class="sheet">
+      <p class="confirm-msg" id="confirmMsg"></p>
+      <div class="confirm-btns">
+        <button class="btn ghost" onclick="App.closeModal('modalConfirm')">取消</button>
+        <button class="btn" onclick="App.confirmOk()">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+</div>
+
+<script src="js/vocab-base.js"></script>
+<script src="js/vocab-core.js"></script>
+<script src="js/vocab-writing.js"></script>
+<script src="js/templates.js"></script>
+<script src="js/describe.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
